@@ -2,38 +2,36 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Settings from "../../public/settings.png"
+import Link from "next/link";
+import Plus from "../../public/plus.png"
+import Close from "../../public/close.png"
 
 export default function Home() {
-const [toggleset, setToggleSet] = useState(false)
+const [toggleSet, setToggleSet] = useState(false)
 
   const tests = [
     {
       title: "Structural Mechanics Midterm",
       description: "Focus on 3 questions practiced in class",
       date: "5 Dec 2023",
-      type: "Midterm",
       degree: "High",
     },
     {
       title: "Engineering Drawing Assignment",
       description: "Submit design sheet 2 and 3",
       date: "8 Dec 2023",
-      type: "Assignment",
       degree: "Medium",
     },
     {
       title: "Fluid Mechanics Exam",
       description: "Full syllabus coverage, focus on Bernoulli principle",
       date: "15 Dec 2023",
-      type: "Exam",
       degree: "Critical",
     },
         {
       title: "Fluid Mechanics Exam",
       description: "Full syllabus coverage, focus on Bernoulli principle",
       date: "15 Dec 2023",
-      type: "Exam",
       degree: "Low",
     },
   ];
@@ -54,19 +52,20 @@ const [toggleset, setToggleSet] = useState(false)
     }
   };
 
-  const toggleSettings = () => {
-    setToggleSet(toggleset);
-  }
-
   return (
     <main className="p-7 space-y-8">
-      <div>
+      <div className="flex flex-row justify-between items-center">
         <h1 className="text-3xl font-bold">Assessments</h1>
+        <Link href="addItem">
+        <div className='p-2.5 bg-blue-200 shadow cursor-pointer rounded-full flex items-center justify-center'>
+          <Image src={Plus} alt='plus-icon' width={15} height={15}/>
+        </div>
+      </Link>
       </div>
       {tests.map((item, index) => (
         <section
           key={index}
-          className="w-full p-4 cursor-pointer bg-neutral-50 shadow-sm space-y-3 rounded-2xl hover:shadow-xl transition-shadow"
+          className="w-full p-4 bg-neutral-50 shadow-sm space-y-3 rounded-2xl hover:shadow-xl transition-shadow"
         >
           <div className="space-y-2">
             <h1 className="font-semibold text-xl">{item.title}</h1>
@@ -78,9 +77,10 @@ const [toggleset, setToggleSet] = useState(false)
               <div className={`px-2 py-1 rounded-md ${getDegreeColor(item.degree)}`}>
               {item.degree}
             </div>
+            
             </div>
-            <div onClick={() => toggleSettings()}>
-              <Image width={30} height={5} alt="settings" src={Settings} className="scale-60 z-50"/>
+            <div className="cursor-pointer relative">
+              <Image width={22} height={22} alt="settings" src={Close} className="scale-60 z-50"/>
             </div>
           </div>
         </section>
